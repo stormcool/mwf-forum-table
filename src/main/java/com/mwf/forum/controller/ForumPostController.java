@@ -9,29 +9,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mwf.forum.model.Topic;
+import com.mwf.forum.model.Post;
 import com.mwf.forum.model.Thread;
+import com.mwf.forum.repository.PostRepository;
 import com.mwf.forum.repository.ThreadRepository;
 import com.mwf.forum.repository.TopicRepository;
 
 @RestController
-@RequestMapping("/forum/threads")
-public class ForumThreadController {
+@RequestMapping("/forum/posts")
+public class ForumPostController {
 	
-	private final ThreadRepository threadRepository;
+	private final PostRepository postRepository;
 	
 	@Autowired
-	ForumThreadController(ThreadRepository threadRepository){
-		this.threadRepository=threadRepository;
+	ForumPostController(PostRepository postRepository){
+		this.postRepository=postRepository;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	Iterable<Thread> retrieveAllThreads(){
-		return this.threadRepository.findAll();
+	Iterable<Post> retrieveAllPosts(){
+		return this.postRepository.findAll();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/{threadId}")
-	Thread retrieveThread(@PathVariable Long threadId){
-		return this.threadRepository.findNameById(threadId);
+	@RequestMapping(method = RequestMethod.GET, value="/{postId}")
+	Post retrievePost(@PathVariable Long postId){
+		return this.postRepository.findNameById(postId);
 	}
 	
 	
