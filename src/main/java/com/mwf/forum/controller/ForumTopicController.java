@@ -13,12 +13,12 @@ import com.mwf.forum.repository.TopicRepository;
 
 @RestController
 @RequestMapping("/forum/topics")
-public class ForumTableController {
+public class ForumTopicController {
 	
 	private final TopicRepository topicRepository;
 	
 	@Autowired
-	ForumTableController(TopicRepository topicRepository){
+	ForumTopicController(TopicRepository topicRepository){
 		this.topicRepository=topicRepository;
 	}
 	

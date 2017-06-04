@@ -2,6 +2,9 @@ package com.mwf.forum.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.mwf.forum.model.Thread;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -34,7 +37,8 @@ public class Thread implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Post
-//	@OneToMany(mappedBy="thread")
+//	@OneToMany(targetEntity=Thread.class, fetch=FetchType.LAZY)
+//	@JoinColumn(name="thread_id")
 //	private List<Post> posts;
 
 	//bi-directional many-to-one association to Topic
