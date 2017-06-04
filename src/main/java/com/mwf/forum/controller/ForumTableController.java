@@ -3,6 +3,7 @@ package com.mwf.forum.controller;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,12 @@ public class ForumTableController {
 	Iterable<Topic> retrieveAllTopics(){
 		return this.topicRepository.findAll();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/{topicId}")
+	Topic retrieveTopic(@PathVariable Long topicId){
+		return this.topicRepository.findNameById(topicId);
+	}
+	
 	
 	
 }
