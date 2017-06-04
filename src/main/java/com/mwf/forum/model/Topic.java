@@ -1,79 +1,102 @@
 package com.mwf.forum.model;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
-import java.sql.Date;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+/**
+ * The persistent class for the topic database table.
+ * 
+ */
 @Entity
-public class Topic {
+//@NamedQuery(name="Topic.findAll", query="SELECT t FROM Topic t")
+public class Topic implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)    
-	private Long topic_id;
-	
-	private String name;
-	
-	private String created_by;
-	
-	private Date created_date;
-	
-	private String modified_by;
-	
-	private Date modified_date;
+	@Column(name="topic_id")
+	private Long topicId;
 
-	public Long getTopic_id() {
-		return topic_id;
+	@Column(name="created_by")
+	private String createdBy;
+
+	@Column(name="created_date")
+	private Timestamp createdDate;
+
+	@Column(name="modified_by")
+	private String modifiedBy;
+
+	@Column(name="modified_date")
+	private Timestamp modifiedDate;
+
+	private String name;
+
+	//bi-directional many-to-one association to Thread
+	@OneToMany(targetEntity=Thread.class, fetch=FetchType.LAZY)
+	@JoinColumn(name="topic_id")
+	private List<Thread> threads;
+
+	public Topic() {
 	}
 
-	public void setTopic_id(Long topic_id) {
-		this.topic_id = topic_id;
+	public Long getTopicId() {
+		return this.topicId;
+	}
+
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
+	}
+
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Timestamp getCreatedDate() {
+		return this.createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getModifiedBy() {
+		return this.modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Timestamp getModifiedDate() {
+		return this.modifiedDate;
+	}
+
+	public void setModifiedDate(Timestamp modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getCreated_by() {
-		return created_by;
+
+	public List<Thread> getThreads() {
+		return this.threads;
 	}
 
-	public void setCreated_by(String created_by) {
-		this.created_by = created_by;
+	public void setThreads(List<Thread> threads) {
+		this.threads = threads;
 	}
 
-	public Date getCreated_date() {
-		return created_date;
-	}
-
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
-	}
-
-	public String getModified_by() {
-		return modified_by;
-	}
-
-	public void setModified_by(String modified_by) {
-		this.modified_by = modified_by;
-	}
-
-	public Date getModified_date() {
-		return modified_date;
-	}
-
-	public void setModified_date(Date modified_date) {
-		this.modified_date = modified_date;
-	}
-	
-	
-	
-	
 }

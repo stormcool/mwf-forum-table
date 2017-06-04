@@ -26,7 +26,7 @@ public interface TopicRepository extends PagingAndSortingRepository<Topic, Long>
 	 * @param id
 	 * @return client of the id passed as parameter.
 	 */   
-    @Query("SELECT c FROM Topic c where c.topic_id = :id") 
+    @Query("SELECT c FROM Topic c where c.topicId = :id") 
 	Topic findNameById(@Param("id") Long id);
 	
 	/**
